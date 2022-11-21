@@ -10,6 +10,8 @@
         public static readonly NombreRomain Dix = new ("X", 10);
         public static readonly NombreRomain Quinze = new ("XV", 15);
         public static readonly NombreRomain Vingt = new ("XX", 20);
+        public static readonly NombreRomain VingtCinq = new ("XXV", 25);
+        public static readonly NombreRomain Trente = new ("XXX", 30);
 
         private NombreRomain(string representation, int valeur)
         {

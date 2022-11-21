@@ -22,7 +22,9 @@ namespace NombresRomains.Test
             ("V", 5),
             ("X", 10),
             ("XV", 15),
-            ("XX", 20)
+            ("XX", 20),
+            ("XXV", 25),
+            ("XXX", 30),
         };
 
         // Pour chaque symbole on renvoie le prédécesseur.
