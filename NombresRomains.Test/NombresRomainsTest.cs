@@ -55,12 +55,28 @@ namespace NombresRomains.Test
         [InlineData(13)]
         public void TestDixPlusUnité(int nombreArabe)
         {
-            // ETANT DONNE un nombre <nombreArabe> compris entre 10 et 10
+            // ETANT DONNE un nombre <nombreArabe> compris entre 10 et 13
             // QUAND on le convertit en nombres romains
             var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
 
             // ALORS on obtient 'X' plus <nombreArabe - 10> fois 'I'
             var attendu = 'X' + new string('I', nombreArabe - 10);
+            Assert.Equal(attendu, resultat);
+        }
+
+        [Theory]
+        [InlineData(15)]
+        [InlineData(16)]
+        [InlineData(17)]
+        [InlineData(18)]
+        public void TestQuinzePlusUnité(int nombreArabe)
+        {
+            // ETANT DONNE un nombre <nombreArabe> compris entre 15 et 18
+            // QUAND on le convertit en nombres romains
+            var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
+
+            // ALORS on obtient "XV" plus <nombreArabe - 15> fois 'I'
+            var attendu = "XV" + new string('I', nombreArabe - 15);
             Assert.Equal(attendu, resultat);
         }
     }
