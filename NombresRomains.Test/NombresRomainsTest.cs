@@ -17,17 +17,19 @@ namespace NombresRomains.Test
             Assert.Equal(attendu, resultat);
         }
 
-        [Fact]
-        public void Test4()
+        [Theory]
+        [InlineData(4, "V")]
+        [InlineData(9, "X")]
+        [InlineData(14, "XV")]
+        public void TestPrédécesseur(int nombreArabe, string symboleSuivant)
         {
-            // ETANT DONNE le nombre 4
-            const int nombreArabe = 4;
-            
+            // ETANT DONNE le nombre <nombreArabe>, prédécesseur d'un multiple de 5
             // QUAND on le convertit en nombres romains
             var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
 
-            // ALORS on obtient 'IV'
-            Assert.Equal("IV", resultat);
+            // ALORS 'I' est ajouté en avant-dernière position de <symboleSuivant>
+            var attendu = symboleSuivant.Insert(symboleSuivant.Length - 1, "I");
+            Assert.Equal(attendu, resultat);
         }
 
         [Theory]
@@ -46,19 +48,6 @@ namespace NombresRomains.Test
             Assert.Equal(attendu, resultat);
         }
 
-        [Fact]
-        public void Test9()
-        {
-            // ETANT DONNE le nombre 9
-            const int nombreArabe = 9;
-
-            // QUAND on le convertit en nombres romains
-            var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
-
-            // ALORS on obtient 'IX'
-            Assert.Equal("IX", resultat);
-        }
-
         [Theory]
         [InlineData(10)]
         [InlineData(11)]
@@ -73,19 +62,6 @@ namespace NombresRomains.Test
             // ALORS on obtient 'X' plus <nombreArabe - 10> fois 'I'
             var attendu = 'X' + new string('I', nombreArabe - 10);
             Assert.Equal(attendu, resultat);
-        }
-
-        [Fact]
-        public void Test14()
-        {
-            // ETANT DONNE le nombre 14
-            const int nombreArabe = 14;
-
-            // QUAND on le convertit en nombres romains
-            var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
-
-            // ALORS on obtient 'XIV'
-            Assert.Equal("XIV", resultat);
         }
     }
 }
