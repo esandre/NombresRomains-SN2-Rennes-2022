@@ -2,6 +2,19 @@ namespace NombresRomains.Test
 {
     public class NombresRomainsTest
     {
+        [Fact]
+        public void Cas49()
+        {
+            // ETANT DONNE le nombre 49
+            const int nombreArabe = 49;
+
+            // QUAND on le convertit en nombres romains
+            var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
+
+            // ALORS on obtient XLIX
+            Assert.Equal("XLIX", resultat);
+        }
+
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
@@ -25,6 +38,10 @@ namespace NombresRomains.Test
             ("XX", 20),
             ("XXV", 25),
             ("XXX", 30),
+            ("XXXV", 35),
+            ("XL", 40),
+            ("XLV", 45),
+            ("L", 50),
         };
 
         // Pour chaque symbole on renvoie le prédécesseur.

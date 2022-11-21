@@ -5,7 +5,7 @@
         public static string Convertir(int nombreArabe)
             => nombreArabe switch
                {
-                   <= 34 => UnitéRomaine.Unité.ReprésenterSoiMêmeOuDemanderAuSuivant(nombreArabe),
+                   <= 53 => UnitéRomaine.Unité.ReprésenterSoiMêmeOuDemanderAuSuivant(nombreArabe),
                    _     => throw new NotImplementedException()
                };
     }

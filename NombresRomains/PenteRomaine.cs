@@ -12,6 +12,8 @@
         {
             get
             {
+                if (_valeur == 35) return new PenteRomaine("XL", 40);
+
                 var dernierCaractère = _representation.Last();
                 var représentationSuivante = dernierCaractère == 'V'
                     ? _representation[..^1] + 'X'
