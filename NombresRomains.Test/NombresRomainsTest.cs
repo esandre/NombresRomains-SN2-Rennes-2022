@@ -17,27 +17,17 @@ namespace NombresRomains.Test
             Assert.Equal(attendu, resultat);
         }
 
-        [Theory]
-        [InlineData(4, "V")]
-        [InlineData(9, "X")]
-        [InlineData(14, "XV")]
-        public void TestPrédécesseur(int nombreArabe, string symboleSuivant)
-        {
-            // ETANT DONNE le nombre <nombreArabe>, prédécesseur d'un multiple de 5
-            // QUAND on le convertit en nombres romains
-            var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
-
-            // ALORS 'I' est ajouté en avant-dernière position de <symboleSuivant>
-            var attendu = symboleSuivant.Insert(symboleSuivant.Length - 1, "I");
-            Assert.Equal(attendu, resultat);
-        }
-
         private static IEnumerable<(string Symbole, int Valeur)> Symboles => new[]
         {
             ("V", 5),
             ("X", 10),
             ("XV", 15)
         };
+
+        // Pour chaque symbole on renvoie le prédécesseur.
+        // Exemple pour XX : XIX
+        private static IEnumerable<object[]> CasTestPrédécesseurGenerator()
+            => Symboles.Select(symbole => new object[] { symbole.Valeur - 1, symbole.Symbole });
 
         private static IEnumerable<object[]> CasTestSymbolePlusUnitéGenerator()
         {
@@ -53,6 +43,7 @@ namespace NombresRomains.Test
         }
 
         public static object[][] CasTestSymbolePlusUnité => CasTestSymbolePlusUnitéGenerator().ToArray();
+        public static object[][] CasTestPrédécesseur => CasTestPrédécesseurGenerator().ToArray();
 
         [Theory]
         [MemberData(nameof(CasTestSymbolePlusUnité))]
@@ -64,6 +55,19 @@ namespace NombresRomains.Test
 
             // ALORS on obtient <symbole> plus <nombreArabe - valeurSymbole> fois 'I' 
             var attendu = symbole + new string('I', nombreArabe - valeurSymbole);
+            Assert.Equal(attendu, resultat);
+        }
+
+        [Theory]
+        [MemberData(nameof(CasTestPrédécesseur))]
+        public void TestPrédécesseur(int nombreArabe, string symboleSuivant)
+        {
+            // ETANT DONNE le nombre <nombreArabe>, prédécesseur d'un multiple de 5
+            // QUAND on le convertit en nombres romains
+            var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
+
+            // ALORS 'I' est ajouté en avant-dernière position de <symboleSuivant>
+            var attendu = symboleSuivant.Insert(symboleSuivant.Length - 1, "I");
             Assert.Equal(attendu, resultat);
         }
     }
