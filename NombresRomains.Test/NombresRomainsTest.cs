@@ -33,50 +33,26 @@ namespace NombresRomains.Test
         }
 
         [Theory]
-        [InlineData(5)]
-        [InlineData(6)]
-        [InlineData(7)]
-        [InlineData(8)]
-        public void TestCinqPlusUnité(int nombreArabe)
+        [InlineData(5, "V", 5)]
+        [InlineData(6, "V", 5)]
+        [InlineData(7, "V", 5)]
+        [InlineData(8, "V", 5)]
+        [InlineData(10, "X", 10)]
+        [InlineData(11, "X", 10)]
+        [InlineData(12, "X", 10)]
+        [InlineData(13, "X", 10)]
+        [InlineData(15, "XV", 15)]
+        [InlineData(16, "XV", 15)]
+        [InlineData(17, "XV", 15)]
+        [InlineData(18, "XV", 15)]
+        public void TestSymbolePlusUnité(int nombreArabe, string symbole, int valeurSymbole)
         {
-            // ETANT DONNE un nombre <nombreArabe> compris entre 5 et 8
+            // ETANT DONNE un nombre <nombreArabe> compris entre <valeurSymbole> et <valeurSymbole> + 3
             // QUAND on le convertit en nombres romains
             var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
 
-            // ALORS on obtient 'V' plus <nombreArabe - 5> fois 'I'
-            var attendu = 'V' + new string('I', nombreArabe - 5);
-            Assert.Equal(attendu, resultat);
-        }
-
-        [Theory]
-        [InlineData(10)]
-        [InlineData(11)]
-        [InlineData(12)]
-        [InlineData(13)]
-        public void TestDixPlusUnité(int nombreArabe)
-        {
-            // ETANT DONNE un nombre <nombreArabe> compris entre 10 et 13
-            // QUAND on le convertit en nombres romains
-            var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
-
-            // ALORS on obtient 'X' plus <nombreArabe - 10> fois 'I'
-            var attendu = 'X' + new string('I', nombreArabe - 10);
-            Assert.Equal(attendu, resultat);
-        }
-
-        [Theory]
-        [InlineData(15)]
-        [InlineData(16)]
-        [InlineData(17)]
-        [InlineData(18)]
-        public void TestQuinzePlusUnité(int nombreArabe)
-        {
-            // ETANT DONNE un nombre <nombreArabe> compris entre 15 et 18
-            // QUAND on le convertit en nombres romains
-            var resultat = ConvertisseurNombresRomains.Convertir(nombreArabe);
-
-            // ALORS on obtient "XV" plus <nombreArabe - 15> fois 'I'
-            var attendu = "XV" + new string('I', nombreArabe - 15);
+            // ALORS on obtient <symbole> plus <nombreArabe - valeurSymbole> fois 'I' 
+            var attendu = symbole + new string('I', nombreArabe - valeurSymbole);
             Assert.Equal(attendu, resultat);
         }
     }
