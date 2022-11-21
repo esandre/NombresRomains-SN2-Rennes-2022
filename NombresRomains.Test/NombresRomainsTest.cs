@@ -32,19 +32,30 @@ namespace NombresRomains.Test
             Assert.Equal(attendu, resultat);
         }
 
+        private static IEnumerable<(string Symbole, int Valeur)> Symboles => new[]
+        {
+            ("V", 5),
+            ("X", 10),
+            ("XV", 15)
+        };
+
+        private static IEnumerable<object[]> CasTestSymbolePlusUnitéGenerator()
+        {
+            // Pour chaque symbole, on renvoie les 3 suivants.
+            // Exemple pour XV : XV, XVI, XVII, XVIII.
+            foreach (var (symbole, valeur) in Symboles)
+            {
+                yield return new object[] { valeur, symbole, valeur };
+                yield return new object[] { valeur + 1, symbole, valeur };
+                yield return new object[] { valeur + 2, symbole, valeur };
+                yield return new object[] { valeur + 3, symbole, valeur };
+            }
+        }
+
+        public static object[][] CasTestSymbolePlusUnité => CasTestSymbolePlusUnitéGenerator().ToArray();
+
         [Theory]
-        [InlineData(5, "V", 5)]
-        [InlineData(6, "V", 5)]
-        [InlineData(7, "V", 5)]
-        [InlineData(8, "V", 5)]
-        [InlineData(10, "X", 10)]
-        [InlineData(11, "X", 10)]
-        [InlineData(12, "X", 10)]
-        [InlineData(13, "X", 10)]
-        [InlineData(15, "XV", 15)]
-        [InlineData(16, "XV", 15)]
-        [InlineData(17, "XV", 15)]
-        [InlineData(18, "XV", 15)]
+        [MemberData(nameof(CasTestSymbolePlusUnité))]
         public void TestSymbolePlusUnité(int nombreArabe, string symbole, int valeurSymbole)
         {
             // ETANT DONNE un nombre <nombreArabe> compris entre <valeurSymbole> et <valeurSymbole> + 3
