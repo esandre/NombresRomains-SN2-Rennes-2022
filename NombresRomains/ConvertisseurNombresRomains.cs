@@ -12,6 +12,8 @@
                    <= 13 => NombreRomain.Dix.AfficherSuite(nombreArabe),
                    14    => NombreRomain.Quinze.Prédécesseur,
                    <= 18 => NombreRomain.Quinze.AfficherSuite(nombreArabe),
+                   19    => NombreRomain.Vingt.Prédécesseur,
+                   <= 24 => NombreRomain.Vingt.AfficherSuite(nombreArabe),
                    _     => throw new NotImplementedException()
                };
     }
